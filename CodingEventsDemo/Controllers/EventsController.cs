@@ -13,6 +13,7 @@ namespace coding_events_practice.Controllers
         // change this List into a Dictionary
         // keys: event names
         // values: event descriptions
+        // this is our Data layer/model
         static private Dictionary<string, string> Events = new Dictionary<string, string>();
 
         // GET: /<controller>/
