@@ -40,18 +40,30 @@ namespace coding_events_practice.Controllers
             // addEventViewModel.Name is whatever name was inputted in form
             // addEventViewModel.Description is the inputted description
             // Therefore, we can use these values to create a new instance of Event
-            Event newEvent = new Event(addEventViewModel.Name, addEventViewModel.Description);
 
-            // Syntax from the book commented here:
-            /*Event newEvent = new Event
+            // we should only create a new event if we have valid data according to the addEventViewModel
+            // ModelState.IsValid returns false if the data inputted into the name and description inputs
+            // in the form on the Add view are invalid
+            // returns true is they are valid
+            if (ModelState.IsValid)
             {
-                Name = addEventViewModel.Name,
-                Description = addEventViewModel.Description
-            };*/
+                Event newEvent = new Event(addEventViewModel.Name, addEventViewModel.Description);
 
-            EventData.Add(newEvent);
+                // Syntax from the book commented here:
+                /*Event newEvent = new Event
+                {
+                    Name = addEventViewModel.Name,
+                    Description = addEventViewModel.Description
+                };*/
 
-            return Redirect("/Events");
+                EventData.Add(newEvent);
+
+                return Redirect("/Events");
+            }
+
+            // pass the addEventViewModel back into the view and rerender it
+            return View(addEventViewModel);
+            
         }
 
         [HttpGet]
